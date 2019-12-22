@@ -1,4 +1,10 @@
-import Todo from '../../types/Todo';
+import TodoItem from '../../types/TodoItem';
+
+import { createHelpers } from 'vuex-map-fields'; // vuex-map-fields 1
+const { getTodosFields, updateTodosFields } = createHelpers({
+  getterType: 'getTodosFields',
+  mutationType: 'updateTodosFields',
+});
 
 export default ({
   namespaced: true,
@@ -7,20 +13,10 @@ export default ({
     todos: [],
   },
   mutations: {
-    current: (state, value) => state.current = value,
-    prependTodos: (state, todo) => state.todos = [todo, ...state.todos],
+    updateTodosFields, // vuex-map-fields 2
   },
   getters: {
-    getTodos: (state, getters) => state.todos,
-    getCurrent: (state, getters) => state.current,
+    getTodosFields, // vuex-map-fields: 3
   },
-  actions: {
-    setCurrent: ({ dispatch, commit }, value) =>
-      commit('current', value),
-    addTodo: ({ dispatch, commit }, task) => {
-      const todo = new Todo(task);
-      commit('prependTodos', todo);
-      dispatch('setCurrent', '');
-    },
-  },
+  actions: {},
 });
