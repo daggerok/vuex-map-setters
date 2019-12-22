@@ -1,6 +1,9 @@
 # vuex-map-setters
 How to minimize vuex mapSetters boilerplate
 
+* [step 1](https://github.com/daggerok/vuex-map-setters/tree/master)
+* [step 1](https://github.com/daggerok/vuex-map-setters/tree/step-1)
+
 ## resources
 
 * [vuex mapSetters how to](https://github.com/vuejs/vuex/issues/1037#issuecomment-341198590)
