@@ -1,4 +1,4 @@
-export default class Todo {
+export default class TodoItem {
   constructor(task, completed, id) {
     if (task) this._task = task;
     this._completed = !!completed;

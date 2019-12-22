@@ -1,4 +1,4 @@
-import Todo from '../../types/Todo';
+import TodoItem from '../../types/TodoItem';
 
 export default ({
   namespaced: true,
@@ -18,7 +18,7 @@ export default ({
     setCurrent: ({ dispatch, commit }, value) =>
       commit('current', value),
     addTodo: ({ dispatch, commit }, task) => {
-      const todo = new Todo(task);
+      const todo = new TodoItem(task);
       commit('prependTodos', todo);
       dispatch('setCurrent', '');
     },

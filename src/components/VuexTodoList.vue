@@ -25,6 +25,7 @@
         addTodo: 'todos/addTodo',
       }),
       save(e) {
+        if (!this.current.trim()) return;
         if (e.key === undefined || e.key === 'Enter') {
           this.addTodo(this.current);
         }
