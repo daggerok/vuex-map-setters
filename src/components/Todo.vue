@@ -8,7 +8,7 @@
 </template>
 
 <script>
-  import Todo from '../types/Todo';
+  import TodoItem from '../types/TodoItem';
   import Unchecked from './Unchecked';
   import Remove from './Remove';
   import Checked from './Checked';
@@ -18,7 +18,7 @@
     components: { Checked, Remove, Unchecked },
     props: {
       todo: {
-        type: Todo,
+        type: TodoItem,
         validator: (value) => !!value.task,
       },
     },

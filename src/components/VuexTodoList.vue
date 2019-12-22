@@ -3,14 +3,20 @@
     <h1>{{ msg }}</h1>
     <input type="text" v-model="current" @keypress="save">
     <button @click="save">save</button>
-    <div v-for="(todo, index) in getTodos" :key="index">
+    <div v-for="(todo, index) in todos" :key="index">
       <Todo :todo="todo"/>
     </div>
   </div>
 </template>
 
 <script>
-  import { mapActions, mapGetters } from 'vuex';
+  import { createHelpers } from 'vuex-map-fields'; // vuex-map-fields: 4
+  import TodoItem from '../types/TodoItem.js';
+  const { mapFields } = createHelpers({
+    getterType: 'getTodosFields',
+    mutationType: 'updateTodosFields',
+  });
+
   import Todo from './Todo';
 
   export default {
@@ -19,30 +25,26 @@
     props: {
       msg: String,
     },
+    data() {
+      return {
+        todos: [],
+        current: '',
+      }
+    },
     methods: {
-      ...mapActions({
-        setCurrent: 'todos/setCurrent',
-        addTodo: 'todos/addTodo',
-      }),
       save(e) {
+        if (!this.current.trim()) return;
         if (e.key === undefined || e.key === 'Enter') {
-          this.addTodo(this.current);
+          this.todos = [...this.todos, new TodoItem(this.current)];
+          this.current = '';
         }
       },
     },
     computed: {
-      ...mapGetters({
-        getTodos: 'todos/getTodos',
-        getCurrent: 'todos/getCurrent',
-      }),
-      current: {
-        get() {
-          return this.getCurrent;
-        },
-        set(value) {
-          this.setCurrent(value);
-        },
-      },
+      ...mapFields([
+        'todos/todos', // vuex-map-fields: 5
+        'todos/current', // vuex-map-fields: 6
+      ]),
     },
   };
 </script>
